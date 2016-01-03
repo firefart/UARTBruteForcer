@@ -1,0 +1,5 @@
+env/
+.idea/
+*.pyc
+log_*.txt
+wordlist.txt
