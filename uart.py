@@ -113,7 +113,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', dest='device', type=str, required=True, help="The serial device. eg /dev/tty.usbmodem")
     parser.add_argument('-s', '--speed', type=int, dest='speed', default=115200, help='Baud rate')
     parser.add_argument('-u', '--user', type=str, dest='user', default='root', help='Username to bruteforce')
-    parser.add_argument('-w', '--wordlist', type=FileType('rt'), dest='wordlist', required=True,
+    parser.add_argument('-w', '--wordlist', type=FileType('rt', encoding='UTF-8'), dest='wordlist', required=True,
                         help='Wordlist used for bruteforcing')
     parser.add_argument('--version', action='version', version='%(prog)s {}'.format(VERSION))
     args = parser.parse_args()
