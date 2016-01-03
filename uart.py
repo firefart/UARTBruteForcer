@@ -44,13 +44,16 @@ def setup_buspirate(ser):
     # 115200
     ser.write(b"9\n")
     print(recieve(ser))
+    # Data bits and parity
     ser.write(b"1\n")
     print(recieve(ser))
+    # Stop bits
     ser.write(b"1\n")
     print(recieve(ser))
+    # polarity
     ser.write(b"1\n")
     print(recieve(ser))
-    # normal
+    # output type normal
     ser.write(b"2\n")
     print(recieve(ser))
     # start bridge
@@ -66,7 +69,7 @@ def recieve(ser):
     while to_recieve < ser.in_waiting:
         to_recieve = ser.in_waiting
         sleep(1)
-    content = ser.read(to_recieve).decode()
+    content = ser.read(to_recieve).decode('utf-8', 'backslashreplace')
     return content
 
 
