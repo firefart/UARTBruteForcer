@@ -3,3 +3,4 @@ env/
 *.pyc
 log_*.txt
 wordlist.txt
+rockyou*.txt
