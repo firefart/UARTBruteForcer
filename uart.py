@@ -85,15 +85,17 @@ def main(device, speed, user, wordlist):
 
         for line in wordlist:
             if LOGIN_TEXT not in content:
-                raise ValueError('Not LOGIN_TEXT return: {}'.format(content))
+                raise ValueError('No LOGIN_TEXT returned: {}'.format(repr(content)))
             password = line.strip().encode()
             logger.debug('Trying password {}'.format(line.strip()))
             ser.write(user.encode())
             ser.write(b"\n")
             content = recieve(ser)
 
+            while content is '\n' or content is '':
+                content = recieve(ser)
             if PASS_TEXT not in content:
-                raise ValueError('Invalid return: {}'.format(content))
+                raise ValueError('Invalid return: {}'.format(repr(content)))
             ser.write(password)
             ser.write(b"\n")
             content = recieve(ser)
@@ -103,7 +105,7 @@ def main(device, speed, user, wordlist):
 
             logger.debug('Password response: {}'.format(repr(content)))
             if LOGIN_INCORRECT not in content:
-                logger.info('Found password? Pass: {}, Return: {}'.format(password, content))
+                logger.info('Found password? Pass: {}, Return: {}'.format(password, repr(content)))
                 return
 
 
